@@ -1,20 +1,19 @@
-script_name('AutoUpdate')
-script_author("Hedsi")
+script_name('Autoupdate script')
+script_author("FORMYS")
+script_description('Автообновление')
 
 require "lib.moonloader"
 
 local dlstatus = require('moonloader').download_status
 local inicfg = require 'inicfg'
-local keys = require "vkeys"
-local ingui = require 'imgui'
 local encoding = require 'encoding'
 
 encoding.default = 'CP1251'
 local u8 = encoding.UTF8
 
 local update_state = false
-local script_vers = 8
-local script_vers_text = "7"
+local script_vers = 9
+local script_vers_text = "8"
 
 local update_url = "https://raw.githubusercontent.com/Harcye/uptade/refs/heads/main/update.ini"
 local update_path = getWorkingDirectory().. "/update.ini"
@@ -27,15 +26,11 @@ function main()
 
     downloadUrlToFile(update_url, update_path, function(id, status)
         if status == dlstatus.STATUS_ENDDOWNLOADDATA then
-            local file = io.open(update_path, "r")
-            if file then
-                file:close()
-                local updateIni = inicfg.load({}, update_path)
-                if updateIni and updateIni.info and tonumber(updateIni.info.vers) and tonumber(updateIni.info.vers) > script_vers then
-                    update_state = true
-                end
-                os.remove(update_path)
+            local updateIni = inicfg.load(nil, update_path)
+            if updateIni and tonumber(updateIni.info.vers) > script_vers then
+                update_state = true
             end
+            os.remove(update_path)
         end
     end)
 
@@ -44,7 +39,7 @@ function main()
         if update_state then
             downloadUrlToFile(script_url, script_path, function(id, status)
                 if status == dlstatus.STATUS_ENDDOWNLOADDATA then
-                    thisScript():reload()
+                    thisScript():reload()  -- Перезагрузка без вывода сообщений
                 end
             end)
             break
