@@ -14,12 +14,12 @@ encoding.default = 'CP1251'
 local u8 = encoding.UTF8
 
 local update_state = false
-local script_vers = 3
-local script_vers_text = "1.05"
+local script_vers = 4
+local script_vers_text = "2"
 
 local update_url = "https://raw.githubusercontent.com/Harcye/uptade/refs/heads/main/update.ini"
 local update_path = getWorkingDirectory().. "/update.ini"
-local script_url = "https://raw.githubusercontent.com/Harcye/uptade/refs/heads/main/autouptabes.lua?raw=true"
+local script_url = "https://raw.githubusercontent.com/Harcye/uptade/refs/heads/main/autouptabes.lua"
 local script_path = thisScript().path
 
 function main()
@@ -57,5 +57,5 @@ function main()
 end
 
 function cmd_update(arg)
-    sampShowDialog(1000, "Автообновление 2.0", u8:decode("Это урок по ffff iiii you обновлению\nНовая версия"), "Закрыть", "", 0)
+    sampShowDialog(1000, "Автообновление 2.0", u8:decode("Это урок по  харкол обновлению\nНовая версия"), "Закрыть", "", 0)
 end
