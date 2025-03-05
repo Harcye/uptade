@@ -19,7 +19,7 @@ local script_vers_text = "1.05"
 
 local update_url = "https://raw.githubusercontent.com/Harcye/uptade/refs/heads/main/update.ini"
 local update_path = getWorkingDirectory().. "/update.ini"
-local script_url = "https://github.com/Harcye/uptade/blob/main/autouptabes.lua?raw=true"
+local script_url = "https://raw.githubusercontent.com/Harcye/uptade/refs/heads/main/autouptabes.lua?raw=true"
 local script_path = thisScript().path
 
 function main()
