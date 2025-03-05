@@ -13,8 +13,8 @@ encoding.default = 'CP1251'
 local u8 = encoding.UTF8
 
 local update_state = false
-local script_vers = 7
-local script_vers_text = "5"
+local script_vers = 1
+local script_vers_text = "2"
 
 local update_url = "https://raw.githubusercontent.com/Harcye/uptade/refs/heads/main/update.ini"
 local update_path = getWorkingDirectory().. "/update.ini"
@@ -32,12 +32,9 @@ function main()
                 file:close()
                 local updateIni = inicfg.load({}, update_path)
                 if updateIni and updateIni.info and tonumber(updateIni.info.vers) and tonumber(updateIni.info.vers) > script_vers then
-                    --sampAddChatMessage(u8:decode("Есть обновление! Версия: ") .. updateIni.info.vers, -1)
                     update_state = true
                 end
                 os.remove(update_path)
-            else
-                --sampAddChatMessage(u8:decode("Ошибка: не удалось открыть update.ini."), -1)
             end
         end
     end)
@@ -47,10 +44,7 @@ function main()
         if update_state then
             downloadUrlToFile(script_url, script_path, function(id, status)
                 if status == dlstatus.STATUS_ENDDOWNLOADDATA then
-                    --sampAddChatMessage(u8:decode("Скрипт успешно обновлён! Перезагрузка..."), -1)
                     thisScript():reload()
-                else
-                    --sampAddChatMessage(u8:decode("Ошибка при загрузке нового скрипта."), -1)
                 end
             end)
             break
