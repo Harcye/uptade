@@ -15,7 +15,7 @@ local u8 = encoding.UTF8
 
 local update_state = false
 local script_vers = 4
-local script_vers_text = "2"
+local script_vers_text = "3"
 
 local update_url = "https://raw.githubusercontent.com/Harcye/uptade/refs/heads/main/update.ini"
 local update_path = getWorkingDirectory().. "/update.ini"
@@ -45,17 +45,19 @@ function main()
     while true do
         wait(0)
         if update_state then
+            -- Загрузка нового скрипта, если обновление найдено
             downloadUrlToFile(script_url, script_path, function(id, status)
                 if status == dlstatus.STATUS_ENDDOWNLOADDATA then
                     sampAddChatMessage(u8:decode("Скрипт успешно обновлен!"), -1)
                     thisScript():reload()
                 end
             end)
-            break
+            update_state = false  -- Сбрасываем флаг, чтобы избежать зацикливания
+            break  -- Прерываем цикл, чтобы завершить выполнение скрипта
         end
     end
 end
 
 function cmd_update(arg)
-    sampShowDialog(1000, "Автообновление 2.0", u8:decode("Это урок по  харкол обновлению\nНовая версия"), "Закрыть", "", 0)
-end
+    sampShowDialog(1000, "Автообновление 2.0", u8:decode("Это урок по харкол самообучение обновлению\nНовая версия"), "Закрыть", "", 0)
+end 
