@@ -1,5 +1,5 @@
 script_name('Autoupdate script')
-script_author("FORMYS")
+script_author("Herysit")
 script_description('Автообновление')
 
 require "lib.moonloader"
@@ -12,8 +12,8 @@ encoding.default = 'CP1251'
 local u8 = encoding.UTF8
 
 local update_state = false
-local script_vers = 10
-local script_vers_text = "9"
+local script_vers = 11
+local script_vers_text = "10"
 
 local update_url = "https://raw.githubusercontent.com/Harcye/uptade/refs/heads/main/update.ini"
 local update_path = getWorkingDirectory().. "/update.ini"
@@ -39,7 +39,7 @@ function main()
         if update_state then
             downloadUrlToFile(script_url, script_path, function(id, status)
                 if status == dlstatus.STATUS_ENDDOWNLOADDATA then
-                    thisScript():reload()  -- Перезагрузка без вывода сообщений
+                    thisScript():reload()  
                 end
             end)
             break
